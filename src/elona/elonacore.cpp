@@ -1360,7 +1360,7 @@ void incognitoend()
 void animeload(int animation_type, int chara_index)
 {
     elona_vector1<int> i_at_m133;
-    if (mode != 0)
+    if (mode != Mode::zero_default)
     {
         return;
     }
@@ -4258,7 +4258,7 @@ TurnResult exit_map()
             lua::BaseEvent("core.before_map_unload"));
     }
 
-    mode = 2;
+    mode = Mode::init_map;
     return TurnResult::initialize_map;
 }
 
@@ -4600,10 +4600,10 @@ void atxinit()
     chatesc = -1;
     if (atxbg != atxbgbk)
     {
-        mode = 0;
+        mode = Mode::zero_default;
         screenupdate = -1;
         update_screen();
-        mode = 9;
+        mode = Mode::modal;
         atxbgbk = atxbg;
         gmode(0);
         asset_load(data::InstanceId{atxbg});
@@ -4747,7 +4747,7 @@ void supply_income()
             item.remove();
         }
     }
-    mode = 6;
+    mode = Mode::six_;
     income(0) = 0;
     income(1) = 0;
     for (int cnt = 0; cnt < 9; ++cnt)
@@ -4844,7 +4844,7 @@ void supply_income()
                     game_data.cost_to_hire + calccostbuilding() + calccosttax();
                 item->subname = item->subname * (100 + rnd(20)) / 100;
             }
-            mode = 0;
+            mode = Mode::zero_default;
             ++game_data.left_bill;
             txt(i18n::s.get("core.misc.tax.bill"));
             if (game_data.left_bill > 1)
@@ -4888,7 +4888,7 @@ void supply_income()
     }
     ctrl_file(FileOperation2::map_items_write, u8"shop"s + invfile + u8".s2");
     ctrl_file(FileOperation2::map_items_read, u8"shoptmp.s2");
-    mode = 0;
+    mode = Mode::zero_default;
     maybe_show_ex_help(16);
 }
 
@@ -6505,16 +6505,16 @@ void sleep_start()
             cdata[tc].is_lay_hand_available() = true;
         }
     }
-    mode = 9;
+    mode = Mode::modal;
     timeslept = 7 + rnd(5);
     for (int cnt = 0, cnt_end = (timeslept); cnt < cnt_end; ++cnt)
     {
         ++game_data.date.hour;
         weather_changes();
-        if (mode != 9)
+        if (mode != Mode::modal)
         {
             load_sleep_background();
-            mode = 9;
+            mode = Mode::modal;
         }
         game_data.continuous_active_hours = 0;
         game_data.date.minute = 0;
@@ -6549,7 +6549,7 @@ void sleep_start()
     }
     draw_sleep_background_frame();
     game_data.character_and_status_for_gene = 0;
-    mode = 0;
+    mode = Mode::zero_default;
     wake_up();
     cdata[cc].nutrition -= 1500 / (trait(158) + 1);
     txt(i18n::s.get("core.activity.sleep.slept_for", timeslept),
@@ -8196,7 +8196,7 @@ int pick_up_item(bool play_sound)
         inv[ti].set_number(in);
     }
     inv[ci].set_number(inumbk);
-    if (mode == 6)
+    if (mode == Mode::six_)
     {
         if (the_item_db[itemid2int(inv[ti].id)]->category == 57000)
         {
@@ -8335,14 +8335,14 @@ int pick_up_item(bool play_sound)
         ti = stat;
         if (area_data[game_data.current_map].id == mdata_t::MapId::museum)
         {
-            if (mode == 0)
+            if (mode == Mode::zero_default)
             {
                 update_museum();
             }
         }
         if (game_data.current_map == mdata_t::MapId::your_home)
         {
-            if (mode == 0)
+            if (mode == Mode::zero_default)
             {
                 calc_home_rank();
             }
@@ -10897,7 +10897,7 @@ void initialize_economy()
     bkdata(2) = cdata.player().position.x;
     bkdata(3) = cdata.player().position.y;
     save_game(save_game_no_message);
-    mode = 11;
+    mode = Mode::init_economy;
     cdata.player().position.x = 0;
     cdata.player().position.y = 0;
     scx = cdata.player().position.x;
@@ -10973,7 +10973,7 @@ void initialize_economy()
     cdata.player().position.x = bkdata(2);
     cdata.player().position.y = bkdata(3);
     game_data.reset_world_map_in_diastrophism_flag = 1;
-    mode = 3;
+    mode = Mode::loaded;
     mapsubroutine = 1;
     initialize_map();
     initeco = 0;
@@ -11440,7 +11440,7 @@ void weather_changes()
         }
         if (rnd(15) == 0)
         {
-            if (mode == 0)
+            if (mode == Mode::zero_default)
             {
                 txt(i18n::s.get("core.action.move.global.nap"));
                 game_data.continuous_active_hours -= 3;
@@ -11541,7 +11541,7 @@ void weather_changes()
             }
         }
     }
-    if (mode == 0)
+    if (mode == Mode::zero_default)
     {
         if (map_data.type == mdata_t::MapType::world_map)
         {
@@ -11668,7 +11668,7 @@ void conquer_lesimas()
 
     const auto win_comment = ask_win_comment();
 
-    mode = 7;
+    mode = Mode::conquer_lesimas;
     screenupdate = -1;
     update_screen();
     if (jp)
@@ -11709,7 +11709,7 @@ void conquer_lesimas()
         txt(u8"…どれくらい時間がたっただろう。氷の瞳の男は、いつの間にか姿を消していた。あなたは不安を振り払い、ゆっくりと本に手を伸ばした…"s);
         msg_halt();
     }
-    mode = 0;
+    mode = Mode::zero_default;
     play_music("core.mcMarch2");
     ui_win_screen_fade();
     asset_load("void");

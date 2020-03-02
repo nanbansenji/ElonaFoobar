@@ -630,7 +630,7 @@ void activity_blending()
             cdata[cc].activity.turn = rpref(2) / 10000;
             for (int cnt = 0;; ++cnt)
             {
-                mode = 12;
+                mode = Mode::blending;
                 ++game_data.date.hour;
                 weather_changes();
                 render_hud();
@@ -667,7 +667,7 @@ void activity_blending()
                 }
             }
             cdata[cc].activity.finish();
-            mode = 0;
+            mode = Mode::zero_default;
             return;
         }
         int stat = blending_find_required_mat();

@@ -1273,7 +1273,7 @@ void draw_items(int x, int y, int dx, int dy, int scrturn_)
 
     if (cell_data.at(x, y).item_appearances_memory != 0)
     {
-        const bool mode_6_or_9 = mode == 6 || mode == 9;
+        const bool mode_6_or_9 = mode == Mode::six_ || mode == Mode::modal;
         int i_;
         if (mode_6_or_9)
         {

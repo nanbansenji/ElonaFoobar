@@ -496,7 +496,7 @@ void supply_initial_equipments()
     eqamulet1.clear();
     eqamulet2.clear();
 
-    if (mode == 1)
+    if (mode == Mode::new_game)
     {
         fixeq = 0;
         probeq = 10;

@@ -173,7 +173,7 @@ bool main_menu_loop()
 
 MainMenuResult main_title_menu()
 {
-    mode = 10;
+    mode = Mode::main_manu_title;
     lomiaseaster = 0;
 
     play_music("core.mcOpening");
@@ -510,7 +510,7 @@ MainMenuResult main_menu_new_game()
         load_gene_files();
     }
     rc = 0;
-    mode = 1;
+    mode = Mode::new_game;
     cm = 1;
     asset_load("void");
     draw("void", 0, 0, windoww, windowh);
@@ -633,7 +633,7 @@ MainMenuResult main_menu_continue()
         {
             playerid = listn(0, p);
             snd("core.ok1");
-            mode = 3;
+            mode = Mode::loaded;
             return MainMenuResult::initialize_game;
         }
         if (ginfo(2) == 0)

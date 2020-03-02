@@ -424,7 +424,7 @@ ELONA_EXTERN(int maxbreath);
 ELONA_EXTERN(int maxitemid);
 ELONA_EXTERN(int menucycle);
 ELONA_EXTERN(int minlevel);
-ELONA_EXTERN(int mode);
+ELONA_EXTERN(Mode mode);
 ELONA_EXTERN(int msync);
 ELONA_EXTERN(int mtilefilecur);
 ELONA_EXTERN(int musicloop);

@@ -605,7 +605,7 @@ void _refresh_map_character(Character& cnt)
 
     if (rc < 57)
     {
-        if (mode == 11)
+        if (mode == Mode::init_economy)
         {
             return;
         }
@@ -1342,7 +1342,7 @@ int initialize_map_pregenerate()
     mid = ""s + game_data.current_map + u8"_"s +
         (100 + game_data.current_dungeon_level);
 
-    if (mode == 3)
+    if (mode == Mode::loaded)
     {
         ctrl_file(FileOperation::map_read);
         ctrl_file(FileOperation2::map_items_read, u8"inv_"s + mid + u8".s2");
@@ -1376,7 +1376,7 @@ int initialize_map_pregenerate()
             }
         }
         ctrl_file(FileOperation2::map_items_read, u8"inv_"s + mid + u8".s2");
-        if (mode == 2)
+        if (mode == Mode::init_map)
         {
             map_placeplayer();
         }
@@ -1430,7 +1430,7 @@ TurnResult initialize_map()
     auto event =
         lua::MapInitializedEvent(was_generated, map_id, game_data.current_map);
 
-    if (mode == 11)
+    if (mode == Mode::init_economy)
     {
         // This result will be ignored by the caller.
         lua::lua->get_event_manager().trigger(event);
@@ -1448,9 +1448,9 @@ TurnResult initialize_map()
         // initialize_cloud_data();
         map_global_proc_diastrophism();
     }
-    if (mode == 3)
+    if (mode == Mode::loaded)
     {
-        mode = 0;
+        mode = Mode::zero_default;
         if (mapsubroutine == 0)
         {
             screenupdate = -1;
@@ -1480,7 +1480,7 @@ TurnResult initialize_map()
     pcattacker = 0;
     cdata.player().enemy_id = 0;
     game_data.chara_last_attacked_by_player = 0;
-    mode = 0;
+    mode = Mode::zero_default;
     screenupdate = -1;
     update_entire_screen();
     Message::instance().buffered_message_end();

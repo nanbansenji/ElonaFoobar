@@ -908,7 +908,7 @@ int calcitemvalue(const Item& item, int calc_mode)
     }
     if (item.weight < 0)
     {
-        if (mode == 6)
+        if (mode == Mode::six_)
         {
             if (category == 92000)
             {

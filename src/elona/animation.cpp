@@ -195,7 +195,7 @@ int dist(const Position& p1, const Position& p2)
 
 void AbstractAnimation::play()
 {
-    if (mode == 9)
+    if (mode == Mode::modal)
         return;
     if (g_config.animation_wait() == 0)
         return;

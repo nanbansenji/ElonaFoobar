@@ -126,7 +126,7 @@ optional<TurnResult> handle_pc_action(std::string& action)
             ++game_data.date.hour;
             weather_changes();
             dbg_skipevent = 0;
-            mode = 0;
+            mode = Mode::zero_default;
             return TurnResult::turn_end;
         }
         if (action == "wizard_delete_map")
@@ -137,7 +137,7 @@ optional<TurnResult> handle_pc_action(std::string& action)
                 ++game_data.current_dungeon_level;
                 txt(u8"lv:"s + game_data.current_dungeon_level);
                 ctrl_file(FileOperation::map_delete);
-                mode = 2;
+                mode = Mode::init_map;
                 levelexitby = 4;
                 return TurnResult::initialize_map;
             }
@@ -155,7 +155,7 @@ optional<TurnResult> handle_pc_action(std::string& action)
         Message::instance().clear();
         firstturn = 1;
         load_save_data();
-        mode = 3;
+        mode = Mode::loaded;
         return TurnResult::initialize_map;
     }
 

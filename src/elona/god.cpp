@@ -408,7 +408,7 @@ void god_proc_switching_penalty(const GodId& new_religion)
         redraw();
         if (cdata.player().god_id != core_god::eyth)
         {
-            mode = 9;
+            mode = Mode::modal;
             txt(i18n::s.get(
                     "core.god.enraged", god_name(cdata.player().god_id)),
                 Message::color{ColorIndex::purple});
@@ -419,7 +419,7 @@ void god_proc_switching_penalty(const GodId& new_religion)
             tc = 0;
             magic();
             snd("core.punish1");
-            mode = 0;
+            mode = Mode::zero_default;
             await(g_config.animation_wait() * 20);
         }
         cdata.player().god_id = new_religion;

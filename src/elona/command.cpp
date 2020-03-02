@@ -2861,7 +2861,7 @@ TurnResult do_open_command(bool play_sound)
             menucycle = 1;
             invctrl(1) = 3;
         }
-        mode = 6;
+        mode = Mode::six_;
         snd_("core.inv");
         ctrl_inventory();
         invcontainer = 0;
@@ -2878,7 +2878,7 @@ TurnResult do_open_command(bool play_sound)
             refresh_burden_state();
         }
         update_screen();
-        mode = 0;
+        mode = Mode::zero_default;
         return TurnResult::turn_end;
     }
     item_separate(ci);

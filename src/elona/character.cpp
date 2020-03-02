@@ -553,7 +553,7 @@ bool chara_place()
 
 void initialize_character()
 {
-    if (mode != 1)
+    if (mode != Mode::new_game)
     {
         chara_add_quality_parens();
     }

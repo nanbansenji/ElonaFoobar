@@ -27,7 +27,7 @@ void shop_refresh_on_talk()
             map_calc_trade_goods_price();
         }
     }
-    mode = 6;
+    mode = Mode::six_;
     ctrl_file(FileOperation2::map_items_write, u8"shoptmp.s2");
 
     bool is_temporary = false;
@@ -69,7 +69,7 @@ void shop_load_shoptmp()
 {
     ctrl_file(FileOperation2::map_items_write, u8"shop"s + invfile + u8".s2");
     ctrl_file(FileOperation2::map_items_read, u8"shoptmp.s2");
-    mode = 0;
+    mode = Mode::zero_default;
 }
 
 void shop_refresh()
@@ -94,7 +94,7 @@ void shop_refresh()
 
 void shop_sell_item()
 {
-    mode = 6;
+    mode = Mode::six_;
     ctrl_file(FileOperation2::map_items_write, u8"shoptmp.s2");
     ctrl_file(FileOperation2::map_items_read, u8"shop"s + invfile + u8".s2");
     shoptrade = 0;

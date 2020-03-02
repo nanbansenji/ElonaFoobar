@@ -439,7 +439,7 @@ void map_placearena(int chara_index, bool is_enemy)
 
 void map_placeplayer()
 {
-    if (mode == 11)
+    if (mode == Mode::init_economy)
     {
         return;
     }

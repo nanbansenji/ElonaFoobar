@@ -852,7 +852,7 @@ void show_shop_log()
         ctrl_file(FileOperation2::map_items_write, u8"shoptmp.s2");
         ctrl_file(FileOperation2::map_items_read, u8"inv_"s + mid + u8".s2");
     }
-    mode = 6;
+    mode = Mode::six_;
     dblistmax = 0;
     for (const auto& item : inv.ground())
     {
@@ -967,7 +967,7 @@ void show_shop_log()
             }
         }
     }
-    mode = 0;
+    mode = Mode::zero_default;
     if (game_data.current_map != area)
     {
         ctrl_file(FileOperation2::map_items_write, u8"inv_"s + mid + u8".s2");
@@ -988,7 +988,7 @@ void show_shop_log()
             item.remove();
         }
     }
-    mode = 6;
+    mode = Mode::six_;
     if (income != 0)
     {
         flt();
@@ -1077,7 +1077,7 @@ void show_shop_log()
     {
         modrank(5, 30, 2);
     }
-    mode = 0;
+    mode = Mode::zero_default;
     ctrl_file(FileOperation2::map_items_write, u8"shop5.s2");
     ctrl_file(FileOperation2::map_items_read, u8"shoptmp.s2");
 }

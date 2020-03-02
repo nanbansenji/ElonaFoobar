@@ -315,7 +315,7 @@ bool maybe_show_ex_help(int id, bool should_update_screen)
     {
         if (game_data.exhelp_flags.at(id) == 0)
         {
-            if (mode == 0)
+            if (mode == Mode::zero_default)
             {
                 if (cdata.player().activity.turn == 0)
                 {
@@ -970,7 +970,7 @@ ChangeAppearanceResult menu_change_appearance(Character& chara)
                 continue;
             }
         }
-        if (mode == 1)
+        if (mode == Mode::new_game)
         {
             if (getkey(snail::Key::f1))
             {

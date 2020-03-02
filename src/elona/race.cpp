@@ -29,7 +29,7 @@ void race_init_chara(Character& chara, data::InstanceId race_id)
         (rnd(data->max_age - data->min_age + 1) + data->min_age);
     chara.height = data->height;
 
-    if (mode == 1)
+    if (mode == Mode::new_game)
     {
         chara.sex = cmsex;
     }

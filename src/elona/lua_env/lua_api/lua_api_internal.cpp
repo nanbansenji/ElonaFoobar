@@ -179,7 +179,7 @@ void LuaApiInternal::leave_map()
 void LuaApiInternal::strange_scientist_pick_reward()
 {
     begintempinv();
-    mode = 6;
+    mode = Mode::six_;
     flt();
     itemcreate_extra_inv(283, -1, -1, 0);
     flt();
@@ -236,7 +236,7 @@ void LuaApiInternal::strange_scientist_pick_reward()
     invctrl(1) = 4;
     ctrl_inventory();
     exittempinv();
-    mode = 0;
+    mode = Mode::zero_default;
 }
 
 void LuaApiInternal::bind(sol::table& api_table)

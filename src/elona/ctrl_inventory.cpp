@@ -1255,7 +1255,7 @@ std::string get_action()
 {
     auto action = get_selected_item(p(0));
     invmark(invctrl) = page * 1000 + cs;
-    if (mode == 9)
+    if (mode == Mode::modal) // inv_mode == 9
     {
         if (listmax == 0)
         {
@@ -1436,7 +1436,7 @@ OnEnterResult on_enter(int& citrade, bool dropcontinue)
             return OnEnterResult{result};
         }
         page_save();
-        if (mode == 6 && inv[ci].number() > 1 && invctrl != 22)
+        if (mode == Mode::six_ && inv[ci].number() > 1 && invctrl != 22) // inv_mode
         {
             if (invctrl == 11)
             {
@@ -1468,7 +1468,7 @@ OnEnterResult on_enter(int& citrade, bool dropcontinue)
         {
             in = inv[ci].number();
         }
-        if (mode == 6 && invctrl != 22 && invctrl != 24)
+        if (mode == Mode::six_ && invctrl != 22 && invctrl != 24) // inv_mode
         {
             if (!g_config.skip_confirm_at_shop())
             {

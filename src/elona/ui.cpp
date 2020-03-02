@@ -1358,7 +1358,7 @@ void update_entire_screen()
 void update_screen()
 {
     gmode(2);
-    if (mode == 9)
+    if (mode == Mode::modal)
     {
         screen_txtadv();
     }
@@ -1483,7 +1483,7 @@ void render_hud()
     // Set transparency of UI parts.
     if (cdata.player().position.x < 6)
     {
-        if (mode != 9)
+        if (mode != Mode::modal)
         {
             if (map_data.type != mdata_t::MapType::world_map)
             {
@@ -2807,7 +2807,7 @@ void show_title(const std::string& title)
 {
     int x;
     int y;
-    if (mode != 1)
+    if (mode != Mode::new_game)
     {
         x = 226;
         y = 0;
@@ -2822,7 +2822,7 @@ void show_title(const std::string& title)
         draw("title_label_frame", x + 8 + i * 192, y);
     }
     gmode(2);
-    draw("tip_icon", x, y + (mode != 1));
+    draw("tip_icon", x, y + (mode != Mode::new_game));
     font(12 + sizefix - en * 2);
     bmes(title, x + 32, y + 1 + vfix + jp, {250, 250, 250});
 }

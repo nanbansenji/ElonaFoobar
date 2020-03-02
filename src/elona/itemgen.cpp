@@ -155,7 +155,7 @@ optional_ref<Item> do_create_item(int item_id, int slot, int x, int y)
     item_delete(item);
     item.index = ci; // needed?
 
-    if (slot == -1 && mode != 6 && mode != 9)
+    if (slot == -1 && mode != Mode::six_ && mode != Mode::modal)
     {
         bool ok = false;
         for (int i = 0; i < 100; ++i)
@@ -217,7 +217,7 @@ optional_ref<Item> do_create_item(int item_id, int slot, int x, int y)
 
     if (item_id == -1)
     {
-        if (fltselect == 0 && mode != 6)
+        if (fltselect == 0 && mode != Mode::six_)
         {
             if (fixlv == Quality::great)
             {
@@ -275,7 +275,7 @@ optional_ref<Item> do_create_item(int item_id, int slot, int x, int y)
     ++itemmemory(1, item_id);
 
     item.quality = static_cast<Quality>(fixlv);
-    if (fixlv == Quality::special && mode != 6 && nooracle == 0)
+    if (fixlv == Quality::special && mode != Mode::six_ && nooracle == 0)
     {
         int owner = inv_getowner(item.index);
         if (owner != -1)
@@ -318,7 +318,7 @@ optional_ref<Item> do_create_item(int item_id, int slot, int x, int y)
     if (item.id == ItemId::deed)
     {
         item.param1 = rnd(5) + 1;
-        if (mode != 6)
+        if (mode != Mode::six_)
         {
             item.param1 = 2;
         }
@@ -442,7 +442,7 @@ optional_ref<Item> do_create_item(int item_id, int slot, int x, int y)
 
     if (reftype == 57000 && item.param1 != 0)
     {
-        if (mode == 6)
+        if (mode == Mode::six_)
         {
             if (rnd(2) == 0)
             {
@@ -476,7 +476,7 @@ optional_ref<Item> do_create_item(int item_id, int slot, int x, int y)
         }
     }
 
-    if (mode == 6)
+    if (mode == Mode::six_)
     {
         item.identify_state = IdentifyState::completely;
     }
@@ -497,7 +497,7 @@ optional_ref<Item> do_create_item(int item_id, int slot, int x, int y)
     {
         item.curse_state = CurseState::none;
     }
-    if (mode != 6)
+    if (mode != Mode::six_)
     {
         if (reftype < 50000)
         {
@@ -559,7 +559,7 @@ void init_item_quality_curse_state_material_and_equipments(Item& item)
             }
         }
     }
-    if (cm || mode == 1 || item.quality == Quality::special)
+    if (cm || mode == Mode::new_game || item.quality == Quality::special)
     {
         item.curse_state = CurseState::none;
     }
@@ -668,7 +668,7 @@ void determine_item_material(Item& item)
         }
         p = 0;
     }
-    if (mode == 1)
+    if (mode == Mode::new_game)
     {
         mtlv = 0;
         p = 0;

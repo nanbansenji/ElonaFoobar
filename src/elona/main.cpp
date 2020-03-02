@@ -48,7 +48,7 @@ void _start_elona()
     if (g_config.startup_script() != ""s &&
         !config_get_boolean("core.foobar.run_script_in_save"))
     {
-        mode = 6;
+        mode = Mode::six_;
         initialize_game();
         _main_loop();
         return;
@@ -76,7 +76,7 @@ void _start_elona()
         else
         {
             playerid = defload;
-            mode = 3;
+            mode = Mode::loaded;
             initialize_game();
             _main_loop();
             return;

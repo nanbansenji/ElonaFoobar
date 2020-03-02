@@ -3445,13 +3445,13 @@ bool _magic_463()
     invctrl(0) = 22;
     invctrl(1) = 5;
     invcontainer = clamp(efp / 10 + 10, 10, 300);
-    mode = 6;
+    mode = Mode::six_;
     snd("core.inv");
     ctrl_inventory();
     invcontainer = 0;
     ctrl_file(FileOperation2::map_items_write, u8"shop"s + invfile + u8".s2");
     ctrl_file(FileOperation2::map_items_read, u8"shoptmp.s2");
-    mode = 0;
+    mode = Mode::zero_default;
     return true;
 }
 

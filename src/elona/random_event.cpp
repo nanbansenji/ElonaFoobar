@@ -158,11 +158,11 @@ optional<RandomEvent> generate_random_event()
     {
         return none;
     }
-    if (mode == 12)
+    if (mode == Mode::blending)
     {
         return none;
     }
-    if (mode == 9)
+    if (mode == Mode::modal)
     {
         return generate_random_event_in_sleep();
     }

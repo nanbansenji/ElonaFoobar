@@ -37,7 +37,7 @@ void casino_dealer()
     begintempinv();
     atxpic = 0;
     snd("core.pop3");
-    mode = 9;
+    mode = Mode::modal;
     atxbg = u8"bg13"s;
     atxbgbk = "";
     SDIM3(atxinfon, 80, 5);
@@ -368,7 +368,7 @@ void casino_acquire_items()
             ctrl_inventory();
         }
     }
-    mode = 0;
+    mode = Mode::zero_default;
     exittempinv();
     await(100);
     snd("core.pop3");

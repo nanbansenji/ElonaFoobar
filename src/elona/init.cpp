@@ -548,7 +548,7 @@ void initialize_debug_globals()
     chara_refresh(0);
 
     cdata.player().can_cast_rapid_magic() = true;
-    mode = 0;
+    mode = Mode::zero_default;
     refresh_burden_state();
     for (int cnt = 0; cnt < 55; ++cnt)
     {
@@ -572,31 +572,31 @@ void initialize_game()
     firstturn = 1;
     Message::instance().buffered_message_begin("   Welcome traveler! ");
 
-    if (mode == 5)
+    if (mode == Mode::character_make_completed)
     {
         initialize_world();
         create_all_adventurers();
-        mode = 2;
+        mode = Mode::init_map;
         event_add(24);
         event_add(2);
         sceneid = 0;
         do_play_scene();
     }
-    if (mode == 6)
+    if (mode == Mode::six_)
     {
         playerid = u8"sav_testbed"s;
         initialize_debug_globals();
         initialize_testbed();
         will_load_script = true;
-        mode = 2;
+        mode = Mode::init_map;
     }
-    if (mode == 2)
+    if (mode == Mode::init_map)
     {
         game_data.next_inventory_serial_id = 1000;
         game_data.next_shelter_serial_id = 100;
         initialize_recipememory();
     }
-    if (mode == 3)
+    if (mode == Mode::loaded)
     {
         load_save_data();
 

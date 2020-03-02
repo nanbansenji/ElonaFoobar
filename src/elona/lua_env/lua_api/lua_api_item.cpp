@@ -127,7 +127,7 @@ LuaApiItem::create_xy(int x, int y, sol::table args)
 
     if (auto it = args.get<sol::optional<int>>("mode"))
     {
-        mode = *it;
+        mode = static_cast<Mode>(*it);
     }
 
     if (auto it = args.get<sol::optional<int>>("number"))

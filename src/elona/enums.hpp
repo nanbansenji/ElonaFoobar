@@ -194,6 +194,21 @@ enum class AdditionalItemInfo
 };
 
 
+enum class Mode : int 
+{
+    zero_default                = 0,    // デフォルト(?)
+    new_game                    = 1,    // main_menu_new_game()
+    init_map                    = 2,    // before TurnResult::initialize_map
+    loaded                      = 3,    // ゲームロード時(?)
+    character_make_completed    = 5,    // キャラメイク完了
+    six_                        = 6,    // アイテムリストウィンドウ(?)
+    conquer_lesimas             = 7,    // ゼーム撃破
+    modal                       = 9,    // sleep or casino or 改宗
+    main_manu_title             = 10,   // main_title_menu()
+    init_economy                = 11,   // ???
+    blending                    = 12,   // 調合
+};
+
 
 ENUMUTIL_DEFINE_NEXT_PREV_FUNCTIONS_LOOPED_EXCLUSIVE_RANGE(
     AdditionalItemInfo,

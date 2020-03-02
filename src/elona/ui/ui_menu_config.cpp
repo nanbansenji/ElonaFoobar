@@ -15,16 +15,16 @@ namespace ui
 
 void UIMenuConfig::_draw_background()
 {
-    int bg_variant_buffer = mode == 10 ? 2 : 4;
+    int bg_variant_buffer = mode == Mode::main_manu_title ? 2 : 4;
     load_background_variants(bg_variant_buffer);
     gsel(0);
 
-    if (mode == 0)
+    if (mode == Mode::zero_default)
     {
         screenupdate = -1;
         update_screen();
     }
-    if (mode == 10)
+    if (mode == Mode::main_manu_title)
     {
         gmode(0);
         asset_load("title");
@@ -82,7 +82,7 @@ void UIMenuConfig::_draw_window(const std::string& title, int width, int height)
 {
     pagesize = 0;
     int y;
-    if (mode == 1)
+    if (mode == Mode::new_game)
     {
         y = winposy(height, 1);
     }
@@ -103,7 +103,7 @@ void UIMenuConfig::_draw_deco()
 {
     display_topic(i18n::s.get("core.config.common.menu"), wx + 34, wy + 36);
 
-    if (mode == 10)
+    if (mode == Mode::main_manu_title)
     {
         p = 2;
     }

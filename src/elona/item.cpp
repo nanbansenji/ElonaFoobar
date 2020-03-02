@@ -348,7 +348,7 @@ void cell_refresh(int x, int y)
     elona_vector1<int> n_at_m55;
     int cnt2_at_m55 = 0;
     int i_at_m55 = 0;
-    if (mode == 6 || mode == 9)
+    if (mode == Mode::six_ || mode == Mode::modal)
     {
         return;
     }
@@ -515,7 +515,7 @@ void item_refresh(Item& i)
     {
         i.remove();
     }
-    if (i.index >= ELONA_ITEM_ON_GROUND_INDEX && mode != 6)
+    if (i.index >= ELONA_ITEM_ON_GROUND_INDEX && mode != Mode::six_)
     {
         // Refresh the cell the item is on if it's on the ground.
         cell_refresh(i.position.x, i.position.y);
@@ -581,7 +581,7 @@ int item_separate(int src)
     inv[dst].set_number(inv[src].number() - 1);
     inv[src].set_number(1);
 
-    if (inv_getowner(dst) == -1 && mode != 6)
+    if (inv_getowner(dst) == -1 && mode != Mode::six_)
     {
         if (inv_getowner(src) != -1)
         {
@@ -1646,11 +1646,11 @@ bool item_stack(int inventory_id, Item& base_item, bool show_message)
 
         bool stackable;
         if (item.id == ItemId::small_medal)
-            stackable = inventory_id != -1 || mode == 6 ||
+            stackable = inventory_id != -1 || mode == Mode::six_ ||
                 item.position == base_item.position;
         else
             stackable =
-                item.almost_equals(base_item, inventory_id != -1 || mode == 6);
+                item.almost_equals(base_item, inventory_id != -1 || mode == Mode::six_);
 
         if (stackable)
         {
@@ -1664,7 +1664,7 @@ bool item_stack(int inventory_id, Item& base_item, bool show_message)
 
     if (did_stack)
     {
-        if (mode != 6 && inv_getowner(base_item.index) == -1)
+        if (mode != Mode::six_ && inv_getowner(base_item.index) == -1)
         {
             cell_refresh(base_item.position.x, base_item.position.y);
         }
@@ -2259,7 +2259,7 @@ int inv_compress(int owner)
         auto&& item = get_random_inv(owner);
         slot = item.index;
         item.remove();
-        if (mode != 6)
+        if (mode != Mode::six_)
         {
             if (item.position.x >= 0 && item.position.x < map_data.width &&
                 item.position.y >= 0 && item.position.y < map_data.height)
@@ -2281,7 +2281,7 @@ int inv_getfreeid(int owner)
             return item.index;
         }
     }
-    if (owner == -1 && mode != 6)
+    if (owner == -1 && mode != Mode::six_)
     {
         txt(i18n::s.get("core.item.items_are_destroyed"));
         return inv_compress(owner);
@@ -2393,14 +2393,14 @@ void item_drop(Item& item_in_inventory, int num, bool building_shelter)
 
     if (area_data[game_data.current_map].id == mdata_t::MapId::museum)
     {
-        if (mode == 0)
+        if (mode == Mode::zero_default)
         {
             update_museum();
         }
     }
     if (game_data.current_map == mdata_t::MapId::your_home)
     {
-        if (mode == 0)
+        if (mode == Mode::zero_default)
         {
             calc_home_rank();
         }
